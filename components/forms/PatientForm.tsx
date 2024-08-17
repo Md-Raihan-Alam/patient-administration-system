@@ -8,6 +8,8 @@ import { Form } from "@/components/ui/form";
 import CustomFormField from "../CustomFormField";
 import SubmitButton from "../SubmitButton";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { createUser } from "@/lib/actions/patient.actions";
 
 export enum FormFieldType {
   INPUT = "input",
@@ -15,11 +17,12 @@ export enum FormFieldType {
   PHONE_INPUT = "phoneInput",
   CHECKBOX = "checkbox",
   DATE_PICKER = "datePicker",
-  SLECT = "slect",
+  SELECT = "select",
   SKELETON = "skeleton",
 }
 
 const PatientForm = () => {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const form = useForm<z.infer<typeof UserFormValidation>>({
     resolver: zodResolver(UserFormValidation),
@@ -35,6 +38,7 @@ const PatientForm = () => {
     email,
     phone,
   }: z.infer<typeof UserFormValidation>) {
+    console.log("OK start");
     setIsLoading(true);
     try {
       const userData = {
@@ -42,8 +46,17 @@ const PatientForm = () => {
         email,
         phone,
       };
+      const user = await createUser(userData);
+      console.log("OK");
+      console.log(user);
+      if (user) {
+        console.log("OK 2");
+        router.push(`/patients/${user.$id}/register`);
+      }
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   }
   return (
