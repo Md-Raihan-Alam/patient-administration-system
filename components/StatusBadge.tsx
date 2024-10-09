@@ -3,6 +3,7 @@ import React from "react";
 import Image from "next/image";
 import { StatusIcon } from "@/constants";
 const StatusBadge = ({ status }: { status: Status }) => {
+  console.log(status);
   return (
     <div
       className={clsx("status-badge", {

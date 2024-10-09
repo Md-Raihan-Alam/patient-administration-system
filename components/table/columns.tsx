@@ -39,9 +39,12 @@ export const columns: ColumnDef<Appointment>[] = [
     accessorKey: "status",
     header: "Status",
     cell: ({ row }) => {
-      <div className="min-w-[115px">
-        <StatusBadge status={row.original.status} />
-      </div>;
+      const appointment = row.original;
+      return (
+        <div className="min-w-[115px]">
+          <StatusBadge status={appointment.status} />
+        </div>
+      );
     },
   },
   {
