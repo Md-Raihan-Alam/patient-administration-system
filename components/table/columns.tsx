@@ -12,6 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import StatusBadge from "../StatusBadge";
+import { Appointment } from "@/types/appwrite.types";
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 export type Payment = {
@@ -21,9 +22,9 @@ export type Payment = {
   email: string;
 };
 
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<Appointment>[] = [
   {
-    header: "ID",
+    header: "#",
     cell: ({ row }) => <p className="text-14-medimu">{row.index + 1}</p>,
   },
   {
