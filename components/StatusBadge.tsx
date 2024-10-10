@@ -3,7 +3,6 @@ import React from "react";
 import Image from "next/image";
 import { StatusIcon } from "@/constants";
 const StatusBadge = ({ status }: { status: Status }) => {
-  console.log(status);
   return (
     <div
       className={clsx("status-badge", {
@@ -20,10 +19,10 @@ const StatusBadge = ({ status }: { status: Status }) => {
         className="h-fit w-3"
       />
       <p
-        className={clsx("text-12-sembold capitalize", {
+        className={clsx("text-12-sembold px-2 capitalize", {
           "text-green-500": status === "scheduled",
-          "bg-blue-500": status === "pending",
-          "bg-red-500": status === "cancelled",
+          "text-blue-500": status === "pending",
+          "text-red-500": status === "cancelled",
         })}
       >
         {status}
