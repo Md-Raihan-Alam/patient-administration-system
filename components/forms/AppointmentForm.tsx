@@ -57,7 +57,6 @@ const AppointmentForm = ({
   });
 
   async function onSubmit(values: z.infer<typeof AppintmentFormValidation>) {
-    console.log("Submitting form with values: ", values);
     setIsLoading(true);
     let status;
     switch (type) {
@@ -72,7 +71,6 @@ const AppointmentForm = ({
     }
     try {
       if (type === "create" && patientId) {
-        console.log("Creating appointment");
         const appointmentData = {
           userId,
           patient: patientId,
@@ -83,7 +81,7 @@ const AppointmentForm = ({
           status: status as Status,
         };
         const appointment = await createAppointment(appointmentData);
-        console.log("Appointment created: ", appointment);
+
         if (appointment) {
           form.reset();
           router.push(
@@ -91,7 +89,6 @@ const AppointmentForm = ({
           );
         }
       } else {
-        console.log("Updating appointment");
         const appointmentToUpdate = {
           userId,
           appointmentId: appointment?.$id!,
@@ -104,7 +101,7 @@ const AppointmentForm = ({
           type,
         };
         const updatedAppointment = await updateAppointment(appointmentToUpdate);
-        console.log("Appointment updated: ", updatedAppointment);
+
         if (updatedAppointment) {
           setOpen && setOpen(false);
           form.reset();

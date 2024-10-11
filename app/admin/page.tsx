@@ -57,4 +57,6 @@ const Admin = async () => {
   );
 };
 
+export const dynamic = "force-dynamic";
+
 export default Admin;
